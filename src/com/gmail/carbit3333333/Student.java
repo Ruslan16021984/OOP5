@@ -61,36 +61,42 @@ public class Student extends Human {
 	public void inputCours() throws StudentException {
 		cours="";
 		for(;;) {
-			cours = String.valueOf("введите имя");
+			cours = String.valueOf(JOptionPane.showInputDialog(null,"введите курс"));
 			if(cours =="null") {
 				throw new StudentException();
 			}
 			if(checkString(cours)!= true) {
 				JOptionPane.showMessageDialog(null, "Error input");
+			}else {
+				break;
 			}
 		}
 	}
 	public void inputDepurtment() throws StudentException {
 		depurtment="";
 		for(;;) {
-			depurtment = String.valueOf("введите имя");
+			depurtment = String.valueOf(JOptionPane.showInputDialog(null,"введите специальность"));
 			if(depurtment =="null") {
 				throw new StudentException();
 			}
 			if(checkString(depurtment)!= true) {
 				JOptionPane.showMessageDialog(null, "Error input");
+			}else {
+				break;
 			}
 		}
 	}
 	public void inputHightScool() throws StudentException {
 		hightScool="";
 		for(;;) {
-			hightScool = String.valueOf("введите имя");
+			hightScool = String.valueOf(JOptionPane.showInputDialog(null,"введите навание высшей школы"));
 			if(hightScool =="null") {
 				throw new StudentException();
 			}
 			if(checkString(hightScool)!= true) {
 				JOptionPane.showMessageDialog(null, "Error input");
+			}else {
+				break;
 			}
 		}
 	}

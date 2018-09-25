@@ -89,13 +89,16 @@ public class Human {
 			try {
 				age = Integer.parseInt(JOptionPane.showInputDialog("¬ведите возраст"));
 				if(age <=0)throw new MyNegativOldExeption();
+				break;
 			} catch (MyNegativOldExeption e) {
+				e.Negativ();
 				// TODO: handle exception
 			}catch (NullPointerException e) {
 				JOptionPane.showMessageDialog(null,"Canceled");
 				break;
 			}catch (NumberFormatException e) {
 				JOptionPane.showMessageDialog(null,"Error number format");
+				//break;
 			}
 			
 		}
