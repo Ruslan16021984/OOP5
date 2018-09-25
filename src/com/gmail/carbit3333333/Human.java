@@ -70,7 +70,7 @@ public class Human {
 		}
 		
 	}
-	public void surName() throws StudentException {
+	public void inputSurName() throws StudentException {
 		surName="";
 		for(;;) {
 			surName = String.valueOf(JOptionPane.showInputDialog(null,"введите Фамилию"));

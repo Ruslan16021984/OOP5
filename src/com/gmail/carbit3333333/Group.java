@@ -17,6 +17,7 @@ public class Group {
 					if (i >=10)
 						throw new ArrayIndexOutExeption();
 					group[i] = new Student();
+					group[i].inputSurName();
 					group[i].inputName();
 					group[i].iputAge();
 					group[i].inputHightScool();
