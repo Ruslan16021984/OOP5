@@ -21,34 +21,22 @@ public class Student extends Human {
 		// TODO Auto-generated constructor stub
 	}
 
-
-	/**
-	 * @return the cours
-	 */
 	public String getCours() {
 		return cours;
 	}
-	/**
-	 * @param cours the cours to set
-	 */
+
 	public void setCours(String cours) {
 		this.cours = cours;
 	}
-	/**
-	 * @return the depurtment
-	 */
+
 	public String getDepurtment() {
 		return depurtment;
 	}
-	/**
-	 * @param depurtment the depurtment to set
-	 */
+
 	public void setDepurtment(String depurtment) {
 		this.depurtment = depurtment;
 	}
-	/**
-	 * @return the hightScool
-	 */
+
 	public String getHightScool() {
 		return hightScool;
 	}
@@ -100,13 +88,10 @@ public class Student extends Human {
 			}
 		}
 	}
-	/* (non-Javadoc)
-	 * @see java.lang.Object#toString()
-	 */
+
 	@Override
 	public String toString() {
 		return "Student [cours=" + cours + ", depurtment=" + depurtment + ", hightScool=" + hightScool + "]";
 	}
-	
 
 }

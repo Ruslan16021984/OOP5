@@ -16,7 +16,11 @@ public class Main {
 		if (s == 0) {
 			group.poiskStudent();
 		}
-		group.sortArray();
+		s = JOptionPane.showConfirmDialog(null, "Хоти ли вы отсортировать по группам");
+		if(s==0) {
+			group.sortStudentsByType();
+		}
+		
 
 		System.out.println(group.toString());
 	}

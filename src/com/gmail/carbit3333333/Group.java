@@ -4,7 +4,7 @@ import java.util.Arrays;
 
 import javax.swing.JOptionPane;
 
-public class Group {
+public class Group implements Voenkomat {
 	private Student[] group = new Student[10];
 
 	public void addStudent() {
@@ -14,7 +14,7 @@ public class Group {
 			if (s == 0) {
 
 				try {
-					if (i >=10)
+					if (i >= 10)
 						throw new ArrayIndexOutExeption();
 					group[i] = new Student();
 					group[i].inputSurName();
@@ -36,7 +36,7 @@ public class Group {
 					// TODO Auto-generated catch block
 					e.Negativ();
 				}
-			}else {
+			} else {
 				break;
 			}
 		}
@@ -92,23 +92,33 @@ public class Group {
 			}
 
 		}
-		if(k ==0) {
+		if (k == 0) {
 			JOptionPane.showMessageDialog(null, "В группе нет такого студента");
 		}
 	}
-	public void sortArray() {
-		Student temp = new Student();
-		for (int i = 0; i < group.length; i++) {
-			for (int j = group.length - 1; j > i; j--) {
-				if (group[j] != null & group[j - 1] != null) {
-					if (group[j].getSurName().compareToIgnoreCase(group[j - 1].getSurName()) < 0) {
-						temp = group[j];
-						group[j] = group[j - 1];
-						group[j - 1] = temp;
-					}
-				}
-			}
-		}
+
+	public void sortBySurName() {
+		Arrays.sort(group, new NameComparator());
+	}
+
+	public void sortByName() {
+		Arrays.sort(group, new SurNameComparator());
+	}
+
+	public void sortByAge() {
+		Arrays.sort(group, new AgeComparator());
+	}
+
+	public void sortByHightScool() {
+		Arrays.sort(group, new HighScoolComparator());
+	}
+
+	public void sortByDepartment() {
+		Arrays.sort(group, new DepartureComparator());
+	}
+
+	public void sortByCours() {
+		Arrays.sort(group, new CourseComparator());
 	}
 
 	private boolean checkString(String surname) {
@@ -130,7 +140,6 @@ public class Group {
 		this.group = group;
 	}
 
-
 	@Override
 	public String toString() {
 		int k = 0;
@@ -144,7 +153,64 @@ public class Group {
 		return "In Group [" + k + "]";
 	}
 
-	
-	
+	public void sortStudentsByType() {
+		int n = 0;
+		for (;;) {
+			try {
+				n = Integer.valueOf(
+						JOptionPane.showInputDialog("Select by what to sort (1-name, 2-surname, 3-sex, 4-age)."));
+				if (n < 1 & n > 4) {
+					throw new MyNegativOldExeption();
+				}
+				break;
+
+			} catch (MyNegativOldExeption e) {
+				e.NegativNomber();
+			} catch (NumberFormatException e) {
+				JOptionPane.showMessageDialog(null, "Error number format");
+			} catch (NullPointerException e) {
+				JOptionPane.showMessageDialog(null, "Canseled set as default");
+				break;
+			}
+		}
+		switch (n) {
+		case 1:
+			sortByName();;
+			break;
+		case 2:
+			sortBySurName();
+			break;
+		case 3:
+			sortByAge();
+			break;
+		case 4:
+			sortByHightScool();
+			break;
+		}
+
+	}
+
+	@Override
+	public void prizivnik() {
+		Student[] prizivnik = new Student[group.length];
+		for (int i = 0; i < prizivnik.length; i++) {
+			if(group[i]!=null) {
+				if(group[i].getAge()>18) {
+					for (int j = 0; j < prizivnik.length; j++) {
+						if(prizivnik[i] ==null) {
+							prizivnik[i]= group[i];
+							break;
+						}
+					}
+				}
+			}
+			
+		}
+		for (int i = 0; i < prizivnik.length; i++) {
+			if(prizivnik[i]!=null) {
+				System.out.println(prizivnik[i]);
+			}
+		}
+	}
 
 }
