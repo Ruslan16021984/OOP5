@@ -191,7 +191,7 @@ public class Group implements Voenkomat {
 	}
 
 	@Override
-	public void prizivnik() {
+	public Student[] prizivnik() {
 		Student[] prizivnik = new Student[group.length];
 		for (int i = 0; i < prizivnik.length; i++) {
 			if(group[i]!=null) {
@@ -211,6 +211,7 @@ public class Group implements Voenkomat {
 				System.out.println(prizivnik[i]);
 			}
 		}
+		return prizivnik;
 	}
 
 }
