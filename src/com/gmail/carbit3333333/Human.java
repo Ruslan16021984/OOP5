@@ -1,8 +1,10 @@
 package com.gmail.carbit3333333;
 
+import java.io.Serializable;
+
 import javax.swing.JOptionPane;
 
-public class Human {
+public class Human implements Serializable{
 	private String name;
 	private String surName;
 	private int age;
@@ -111,6 +113,7 @@ public class Human {
 		}
 		
 	}
+
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
 	 */
@@ -118,5 +121,7 @@ public class Human {
 	public String toString() {
 		return "Human [name=" + name + ", surName=" + surName + ", age=" + age + "]";
 	}
+
+
 	
 }

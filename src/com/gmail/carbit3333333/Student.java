@@ -1,8 +1,10 @@
 package com.gmail.carbit3333333;
 
+import java.io.Serializable;
+
 import javax.swing.JOptionPane;
 
-public class Student extends Human {
+public class Student extends Human implements Serializable{
 
 	private String cours;
 	private String depurtment;
@@ -91,7 +93,16 @@ public class Student extends Human {
 
 	@Override
 	public String toString() {
-		return "Student [cours=" + cours + ", depurtment=" + depurtment + ", hightScool=" + hightScool + "]";
+		return "Student [name=" 
+	+ getName() + 
+	", surName=" + getSurName() + 
+	", age=" + getAge() + 
+	"cours=" + getCours() + 
+	", depurtment=" + getDepurtment() + 
+	", hightScool=" + getHightScool() + "]";
 	}
+	
+
+	
 
 }

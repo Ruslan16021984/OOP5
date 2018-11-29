@@ -1,11 +1,33 @@
 package com.gmail.carbit3333333;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.Arrays;
 
 import javax.swing.JOptionPane;
 
-public class Group implements Voenkomat {
-	private Student[] group = new Student[10];
+public class Group implements Voenkomat,Serializable {
+	//private Student[] group = new Student[10];
+	Student student1 = new Student("Иванов", "Петя", 21, "АКАДЕМИЯ", "", "");
+	Student student2 = new Student("петров", "Вася", 23, "АКАДЕМИЯ", "", "");
+	Student student3 = new Student("Сидоров", "Роман", 13, "АКАДЕМИЯ", "", "");
+	Student student4 = new Student("Вялов", "Дима", 12, "АКАДЕМИЯ", "", "");
+	Student student5 = new Student("Сдор", "Кузя", 15, "Институт", "", "");
+	Student student6 = new Student("Микитин", "Руся", 25, "нститут", "", "");
+	Student student7 = new Student("Овчин", "Света", 24, "нститут", "", "");
+	Student student8 = new Student("Кутузова", "Марина", 22, "нститут", "", "");
+	Student student9 = new Student("Маляр", "Витя", 23, "Колледж", "", "");
+	Student student10 = new Student("Кирпич", "Костя", 23, "Колледж", "", "");
+	Student[] group = new Student[] {student1, student2, student3,student4, student5, student6, student7,student8, student9, student10};
+
+	
 
 	public void addStudent() {
 		int i = 0;
@@ -69,7 +91,8 @@ public class Group implements Voenkomat {
 		String surname;
 		for (;;) {
 			try {
-				surname = String.valueOf(JOptionPane.showInputDialog(null, "Введите имя студента которого вы ищете"));
+				surname = String
+						.valueOf(JOptionPane.showInputDialog(null, "Введите Фамилию студента которого вы ищете"));
 				if (surname == "null")
 					throw new StudentException();
 				if (checkString(surname) != true) {
@@ -98,27 +121,33 @@ public class Group implements Voenkomat {
 	}
 
 	public void sortBySurName() {
-		Arrays.sort(group, new NameComparator());
+		Arrays.sort(group, (a, b) -> CheckNull.checkNull(a, b) != CheckNull.NOT_NULL ? CheckNull.checkNull(a, b)
+				: a.getSurName().compareTo(b.getSurName()));
 	}
 
 	public void sortByName() {
-		Arrays.sort(group, new SurNameComparator());
+		Arrays.sort(group, (a, b) -> CheckNull.checkNull(a, b) != CheckNull.NOT_NULL ? CheckNull.checkNull(a, b)
+				: a.getName().compareTo(b.getName()));
 	}
 
 	public void sortByAge() {
-		Arrays.sort(group, new AgeComparator());
+		Arrays.sort(group, (a, b) -> CheckNull.checkNull(a, b) != CheckNull.NOT_NULL ? CheckNull.checkNull(a, b)
+				: a.getAge() - b.getAge());
 	}
 
 	public void sortByHightScool() {
-		Arrays.sort(group, new HighScoolComparator());
+		Arrays.sort(group, (a, b) -> CheckNull.checkNull(a, b) != CheckNull.NOT_NULL ? CheckNull.checkNull(a, b)
+				: a.getHightScool().compareTo(b.getHightScool()));
 	}
 
 	public void sortByDepartment() {
-		Arrays.sort(group, new DepartureComparator());
+		Arrays.sort(group, (a, b) -> CheckNull.checkNull(a, b) != CheckNull.NOT_NULL ? CheckNull.checkNull(a, b)
+				: a.getDepurtment().compareTo(b.getDepurtment()));
 	}
 
 	public void sortByCours() {
-		Arrays.sort(group, new CourseComparator());
+		Arrays.sort(group, (a, b) -> CheckNull.checkNull(a, b) != CheckNull.NOT_NULL ? CheckNull.checkNull(a, b)
+				: a.getCours().compareTo(b.getCours()));
 	}
 
 	private boolean checkString(String surname) {
@@ -142,15 +171,16 @@ public class Group implements Voenkomat {
 
 	@Override
 	public String toString() {
-		int k = 0;
-		for (int i = 0; i < group.length; i++) {
-			if (group[i] != null) {
-				System.out.println(group[i] + " ");
-				k += 1;
+		StringBuilder builder = new StringBuilder();
+		for (Student student : group) {
+			if (student != null) {
+				builder.append(student.toString());
+				builder.append("\n");
 			}
+
 		}
 
-		return "In Group [" + k + "]";
+		return builder.toString();
 	}
 
 	public void sortStudentsByType() {
@@ -158,7 +188,7 @@ public class Group implements Voenkomat {
 		for (;;) {
 			try {
 				n = Integer.valueOf(
-						JOptionPane.showInputDialog("Select by what to sort (1-name, 2-surname, 3-sex, 4-age)."));
+						JOptionPane.showInputDialog("Select by what to sort (1-name, 2-surname, 3-age, 4-HightScool)."));
 				if (n < 1 & n > 4) {
 					throw new MyNegativOldExeption();
 				}
@@ -175,7 +205,8 @@ public class Group implements Voenkomat {
 		}
 		switch (n) {
 		case 1:
-			sortByName();;
+			sortByName();
+			;
 			break;
 		case 2:
 			sortBySurName();
@@ -194,24 +225,36 @@ public class Group implements Voenkomat {
 	public Student[] prizivnik() {
 		Student[] prizivnik = new Student[group.length];
 		for (int i = 0; i < prizivnik.length; i++) {
-			if(group[i]!=null) {
-				if(group[i].getAge()>18) {
+			if (group[i] != null) {
+				if (group[i].getAge() > 18) {
 					for (int j = 0; j < prizivnik.length; j++) {
-						if(prizivnik[i] ==null) {
-							prizivnik[i]= group[i];
+						if (prizivnik[i] == null) {
+							prizivnik[i] = group[i];
 							break;
 						}
 					}
 				}
 			}
-			
+
 		}
 		for (int i = 0; i < prizivnik.length; i++) {
-			if(prizivnik[i]!=null) {
+			if (prizivnik[i] != null) {
 				System.out.println(prizivnik[i]);
 			}
 		}
 		return prizivnik;
 	}
+
+	public void saveToFile(String name) {
+		try (FileWriter fileWriter = new FileWriter(new File(name))) {
+			fileWriter.write(toString());
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	
+
 
 }
