@@ -88,7 +88,7 @@ public class Group implements Voenkomat,Serializable {
 	}
 
 	public void poiskStudent() {
-		String surname;
+		String surname = "";
 		for (;;) {
 			try {
 				surname = String
@@ -96,7 +96,7 @@ public class Group implements Voenkomat,Serializable {
 				if (surname == "null")
 					throw new StudentException();
 				if (checkString(surname) != true) {
-					JOptionPane.showMessageDialog(null, "Ошибка");
+					JOptionPane.showMessageDialog(null, "Ошибка ввода");
 				} else {
 					break;
 				}
@@ -106,10 +106,11 @@ public class Group implements Voenkomat,Serializable {
 			}
 		}
 		int k = 0;
-		for (int i = 0; i < group.length; i++) {
+		for (int i = 0; i < group.length; i++) {			
 			if (group[i] != null) {
-				if (group[i].getSurName().compareToIgnoreCase(surname) == 0) {
+				if (group[i].getName().compareToIgnoreCase(surname)==0) {
 					System.out.println(group[i]);
+					System.out.println();
 					k += 1;
 				}
 			}
@@ -244,7 +245,7 @@ public class Group implements Voenkomat,Serializable {
 		}
 		return prizivnik;
 	}
-
+     // метод сохранения в файл
 	public void saveToFile(String name) {
 		try (FileWriter fileWriter = new FileWriter(new File(name))) {
 			fileWriter.write(toString());
