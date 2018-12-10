@@ -13,7 +13,7 @@ public class Main {
 
 	public static void main(String[] args) {
 		Group group = new Group();
-		 group.addStudents();
+		 group.addStudent();
 
 		int s = JOptionPane.showConfirmDialog(null, "Вам нужно удалить студента из группы?");
 		if (s == 0) {

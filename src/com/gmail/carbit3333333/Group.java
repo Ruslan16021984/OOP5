@@ -34,20 +34,18 @@ public class Group implements Voenkomat, Serializable {
 	Student student9 = new Student("Маляр", "Витя", 23, "Колледж", "", "");
 	Student student10 = new Student("Кирпич", "Костя", 23, "Колледж", "", "");
 	
-	// Student[] group = new Student[] {student1, student2, student3,student4,
-	// student5, student6, student7,student8, student9, student10};
-	public void addStudents() {
-		group.add(student1);
-		group.add(student2);
-		group.add(student3);
-		group.add(student4);
-		group.add(student5);
-		group.add(student6);
-		group.add(student7);
-		group.add(student8);
-		group.add(student9);
-		group.add(student10);
-	}
+//	public void addStudents() {
+//		group.add(student1);
+//		group.add(student2);
+//		group.add(student3);
+//		group.add(student4);
+//		group.add(student5);
+//		group.add(student6);
+//		group.add(student7);
+//		group.add(student8);
+//		group.add(student9);
+//		group.add(student10);
+//	}
 	public void addStudent() {
 		int i = 0;
 		for (;;) {
