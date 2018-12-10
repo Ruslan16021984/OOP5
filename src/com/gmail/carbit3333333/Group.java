@@ -9,12 +9,20 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.List;
+import java.util.NavigableSet;
+import java.util.Set;
 
 import javax.swing.JOptionPane;
 
-public class Group implements Voenkomat,Serializable {
-	//private Student[] group = new Student[10];
+public class Group implements Voenkomat, Serializable {
+	List<Student> group = new ArrayList<>();
+
+	// private Student[] group = new Student[10];
 	Student student1 = new Student("Иванов", "Петя", 21, "АКАДЕМИЯ", "", "");
 	Student student2 = new Student("петров", "Вася", 23, "АКАДЕМИЯ", "", "");
 	Student student3 = new Student("Сидоров", "Роман", 13, "АКАДЕМИЯ", "", "");
@@ -25,10 +33,21 @@ public class Group implements Voenkomat,Serializable {
 	Student student8 = new Student("Кутузова", "Марина", 22, "нститут", "", "");
 	Student student9 = new Student("Маляр", "Витя", 23, "Колледж", "", "");
 	Student student10 = new Student("Кирпич", "Костя", 23, "Колледж", "", "");
-	Student[] group = new Student[] {student1, student2, student3,student4, student5, student6, student7,student8, student9, student10};
-
 	
-
+	// Student[] group = new Student[] {student1, student2, student3,student4,
+	// student5, student6, student7,student8, student9, student10};
+	public void addStudents() {
+		group.add(student1);
+		group.add(student2);
+		group.add(student3);
+		group.add(student4);
+		group.add(student5);
+		group.add(student6);
+		group.add(student7);
+		group.add(student8);
+		group.add(student9);
+		group.add(student10);
+	}
 	public void addStudent() {
 		int i = 0;
 		for (;;) {
@@ -38,13 +57,13 @@ public class Group implements Voenkomat,Serializable {
 				try {
 					if (i >= 10)
 						throw new ArrayIndexOutExeption();
-					group[i] = new Student();
-					group[i].inputSurName();
-					group[i].inputName();
-					group[i].iputAge();
-					group[i].inputHightScool();
-					group[i].inputDepurtment();
-					group[i].inputCours();
+					group.add(new Student());
+					group.get(i).inputSurName();
+					group.get(i).inputName();
+					group.get(i).iputAge();
+					group.get(i).inputHightScool();
+					group.get(i).inputDepurtment();
+					group.get(i).inputCours();
 					i += 1;
 
 				} catch (StudentException e) {
@@ -64,6 +83,15 @@ public class Group implements Voenkomat,Serializable {
 		}
 	}
 
+
+	public List<Student> getGroup() {
+		return group;
+	}
+	
+	public void setGroup(List<Student> group) {
+		this.group = group;
+	}
+
 	public void deleteStudent() {
 		for (;;) {
 			try {
@@ -71,7 +99,7 @@ public class Group implements Voenkomat,Serializable {
 						JOptionPane.showInputDialog("Введите номер записи которую вы хотите удалить(от 1 до 10)"));
 				if (n < 1 & n > 10)
 					throw new MyNegativOldExeption();
-				group[n] = null;
+				group.remove(n);
 				break;
 			} catch (MyNegativOldExeption e) {
 				e.Negativ();
@@ -106,13 +134,11 @@ public class Group implements Voenkomat,Serializable {
 			}
 		}
 		int k = 0;
-		for (int i = 0; i < group.length; i++) {			
-			if (group[i] != null) {
-				if (group[i].getName().compareToIgnoreCase(surname)==0) {
-					System.out.println(group[i]);
-					System.out.println();
-					k += 1;
-				}
+		for (int i = 0; i < group.size(); i++) {
+			if (group.get(i).getName().compareToIgnoreCase(surname) == 0) {
+				System.out.println(group.get(i));
+				System.out.println();
+				k += 1;
 			}
 
 		}
@@ -122,33 +148,27 @@ public class Group implements Voenkomat,Serializable {
 	}
 
 	public void sortBySurName() {
-		Arrays.sort(group, (a, b) -> CheckNull.checkNull(a, b) != CheckNull.NOT_NULL ? CheckNull.checkNull(a, b)
-				: a.getSurName().compareTo(b.getSurName()));
+		Collections.sort(group,(a, b)-> a.getSurName().compareTo(b.getSurName()));
 	}
 
 	public void sortByName() {
-		Arrays.sort(group, (a, b) -> CheckNull.checkNull(a, b) != CheckNull.NOT_NULL ? CheckNull.checkNull(a, b)
-				: a.getName().compareTo(b.getName()));
+		Collections.sort(group, (a, b) -> a.getName().compareTo(b.getName()));
 	}
 
 	public void sortByAge() {
-		Arrays.sort(group, (a, b) -> CheckNull.checkNull(a, b) != CheckNull.NOT_NULL ? CheckNull.checkNull(a, b)
-				: a.getAge() - b.getAge());
+		Collections.sort(group, (a, b) -> a.getAge() - b.getAge());
 	}
 
 	public void sortByHightScool() {
-		Arrays.sort(group, (a, b) -> CheckNull.checkNull(a, b) != CheckNull.NOT_NULL ? CheckNull.checkNull(a, b)
-				: a.getHightScool().compareTo(b.getHightScool()));
+		Collections.sort(group, (a, b) -> a.getHightScool().compareTo(b.getHightScool()));
 	}
 
 	public void sortByDepartment() {
-		Arrays.sort(group, (a, b) -> CheckNull.checkNull(a, b) != CheckNull.NOT_NULL ? CheckNull.checkNull(a, b)
-				: a.getDepurtment().compareTo(b.getDepurtment()));
+		Collections.sort(group, (a, b) -> a.getDepurtment().compareTo(b.getDepurtment()));
 	}
 
 	public void sortByCours() {
-		Arrays.sort(group, (a, b) -> CheckNull.checkNull(a, b) != CheckNull.NOT_NULL ? CheckNull.checkNull(a, b)
-				: a.getCours().compareTo(b.getCours()));
+		Collections.sort(group, (a, b) -> a.getCours().compareTo(b.getCours()));
 	}
 
 	private boolean checkString(String surname) {
@@ -157,17 +177,6 @@ public class Group implements Voenkomat,Serializable {
 		}
 
 		return true;
-	}
-
-	public Student[] getGroup() {
-		return group;
-	}
-
-	/**
-	 * @param group the group to set
-	 */
-	public void setGroup(Student[] group) {
-		this.group = group;
 	}
 
 	@Override
@@ -188,8 +197,8 @@ public class Group implements Voenkomat,Serializable {
 		int n = 0;
 		for (;;) {
 			try {
-				n = Integer.valueOf(
-						JOptionPane.showInputDialog("Select by what to sort (1-name, 2-surname, 3-age, 4-HightScool)."));
+				n = Integer.valueOf(JOptionPane
+						.showInputDialog("Select by what to sort (1-name, 2-surname, 3-age, 4-HightScool)."));
 				if (n < 1 & n > 4) {
 					throw new MyNegativOldExeption();
 				}
@@ -223,29 +232,21 @@ public class Group implements Voenkomat,Serializable {
 	}
 
 	@Override
-	public Student[] prizivnik() {
-		Student[] prizivnik = new Student[group.length];
-		for (int i = 0; i < prizivnik.length; i++) {
-			if (group[i] != null) {
-				if (group[i].getAge() > 18) {
-					for (int j = 0; j < prizivnik.length; j++) {
-						if (prizivnik[i] == null) {
-							prizivnik[i] = group[i];
-							break;
-						}
-					}
-				}
+	public ArrayList<Student> prizivnik() {
+		ArrayList<Student> prizivnik = new ArrayList<>();
+		for (int i = 0; i < group.size(); i++) {
+			if (group.get(i).getAge() > 18) {
+				prizivnik.add(group.get(i));
 			}
 
 		}
-		for (int i = 0; i < prizivnik.length; i++) {
-			if (prizivnik[i] != null) {
-				System.out.println(prizivnik[i]);
-			}
-		}
+
+		System.out.println(prizivnik);
 		return prizivnik;
+
 	}
-     // метод сохранения в файл
+
+	// метод сохранения в файл
 	public void saveToFile(String name) {
 		try (FileWriter fileWriter = new FileWriter(new File(name))) {
 			fileWriter.write(toString());
@@ -254,8 +255,5 @@ public class Group implements Voenkomat,Serializable {
 			e.printStackTrace();
 		}
 	}
-
-	
-
 
 }
